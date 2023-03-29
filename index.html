@@ -8,6 +8,8 @@
       <base href="https://web--tauvf.run.goorm.site/">
       <!base : 웹 페이지의 기본 url지정>
 	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+	  <script type="text/javascript" src="js/search.js" defer></script> <!defer html -> js 인식못해서 오류 많이 났는데 이제 js->html>
 	</head>
    <body>
 	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
@@ -62,15 +64,20 @@
       <font size ="4em" color ="#2F7104"> 문서 제목 자바스크립트 코트, CSS 
          스타일 정의, 메타데이터 정의</font></p>
       <br>
-      <p style= "text-align:center">
+      	<p style= "text-align:center">
          <a href ="index.html">
-         <img src="img/googlelogo_color_big.png" alt="구글 이미지">
-      </a>
+		<div class="mx-auto" style="width:500px;">
+			<a href="index.html" target="_blank"></a>
+		<img src="img/googlelogo_color_big.png" class="img-fluid" alt="구글 이미지">	
+		</div>
+    	</a>
       </p>
       <br>
-	  <p style="text-align:center">검색 : <input type="text" name="search" size="55" value=""><br></p>
-	    <table style="border:1px solid black;margin-left:auto;margin-right:auto;">
-		<!테이블을 정의합니다.>
+	 	<p style="text-align:center">검색 :
+            <input type="text" name="search" size="55" value=""><button id="search_btn" type="button">검색</button>
+            <br></p><br><br><br>
+        <table style="margin-left: auto; margin-right: auto;" border="1" width="500">
+            <! 테이블을 정의합니다.>
 			<caption>인기 검색어</caption><!테이블 제목.>
 			<tbody>
 				<tr><td bgcolor="green"width="50"><b>영화</b></td>
@@ -96,5 +103,14 @@
 	   </table>
       <p style = "text-align:right;"><font size = "4em" color = "#BDC8B1"> 문서의 본문 텍스트, 이미지 테이블 자바스크립트 코드, 동영상 등 </font>
 	   </p>
+	   <footer class="bg-light text-center text-lg-start">
+  <div class="text-center p-3" style="background-color:#D8D8D8;">
+    <h3 class="text-secondary">FOOTER</h3>
+    © 2020 Copyright: <a class="text-dark" href="https://web--tauvf.run.goorm.site/index.html/"target="_blank">꾸글.com</a>
+      <i class="bi bi-facebook" style="color: #3b5998; font-size: 2rem;"></i>
+      <i class="bi bi-twitter" style="color: #55acee; font-size: 2rem;"></i>
+      <i class="bi bi-instagram" style="color: #ac2bac; font-size: 2rem;"></i>
+  </div>
+</footer>
     </body>
 </html>
