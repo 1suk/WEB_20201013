@@ -11,11 +11,11 @@ function search_message(){
 	}
 	else{
 		alert("검색을 수행합니다!");
-		let text = document.getElementById("search_message").innerHTML = search_str.value;
+		document.getElementById("search_message").innerHTML = search_str.value;
 		document.querySelector("#form_main").submit();
 	}
-}*/                                            
-const limitWords = ["금지단어1", "금지단어2", "금지단어3"]; // 검색 제한 단어 선언 및 초기화
+} */                                        
+const limitWords = ["씨발", "미친", "개새끼"]; // 검색 제한 단어 선언 및 초기화
 
 document.getElementById("search_btn").addEventListener('click', search_message);
 
@@ -25,14 +25,14 @@ function search_message(){
         alert("검색어가 비었습니다. 입력해주세요");
     }
     else{
-        let isLimitWord = false; // 검색어가 제한 단어인지 여부를 나타내는 변수
+        let isLimitWord; // 검색어가 제한 단어인지 여부를 나타내는 변수
         for(let i = 0; i < limitWords.length; i++){
             if(search_str === limitWords[i]){ // 검색어가 제한 단어와 일치하는 경우
                 isLimitWord = true; // 제한 단어임을 표시
                 break; // 반복문 중단
             }
         }
-        if(isLimitWord){ // 검색어가 제한 단어인 경우
+        if(isLimitWord = true){ // 검색어가 제한 단어인 경우
             alert("검색이 제한된 단어입니다. 다른 검색어를 입력해주세요.");
         }
         else{
@@ -41,4 +41,3 @@ function search_message(){
         }
     }
 }
-
