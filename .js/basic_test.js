@@ -12,7 +12,7 @@ if (true) {
 console.log(c_1);
 
 let d = 5;
-let d = '값 재할당'; //Error?
+//let d = '값 재할당'; //Error?
 console.log(d);
 
 const e ='상수1 접근';
