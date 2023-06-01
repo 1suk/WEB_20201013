@@ -97,7 +97,7 @@ function login(){ // 로그인
     }
 }
 
-function setCookie(name, value, expiredays) {
+/*function setCookie(name, value, expiredays) {
         var date = new Date();
         date.setDate(date.getDate() + expiredays);
         document.cookie = escape(name) + "=" + escape(value) + "; expires=" + date.toUTCString() + "SameSite=None; Secure";
@@ -142,9 +142,9 @@ function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
 	check.checked = true;
     }
 	session_check(); // 세션 유무 검사
-}
+}*/
 
-function session_set() { //세션 저장
+/*function session_set() { //세션 저장
     let id = document.querySelector("#floatingInput");
 	    let password = document.querySelector("#floatingPassword");
     if (sessionStorage) {
@@ -179,9 +179,8 @@ function session_del() {//세션 삭제
     } else {
         alert("세션 스토리지 지원 x");
     }
-}
-
-function encodeByAES256(key, data){
+}*/
+/*function encodeByAES256(key, data){
     const cipher = CryptoJS.AES.encrypt(data, CryptoJS.enc.Utf8.parse(key), {
         iv: CryptoJS.enc.Utf8.parse(""),
         padding: CryptoJS.pad.Pkcs7,
@@ -214,4 +213,4 @@ function decrypt_text(){
     const eb = session_get();
     const b = this.decodeByAES256(rk, eb);
     console.log(b); 
-}
+}*/
