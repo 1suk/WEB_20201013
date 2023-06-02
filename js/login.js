@@ -56,11 +56,11 @@ function get_id(){
           			}
        			} // 2중 for문 끝
 			};//함수 끝
-		alert(getParameters('id') + '님 방갑습니다!'); // 메시지 창 출력
+		alert(getParameters("id") + '님 방갑습니다!'); // 메시지 창 출력
 		}
 }
 
-function addJavascript(isname){//자바스크립트 외부 연동
+function addJavascript(jsname){//자바스크립트 외부 연동
 			var th = document.getElementsByTagName('head')[0];
 			var s = document.createElement('script');
 			s.setAttribute('type','text/javascript');
