@@ -55,7 +55,7 @@ function get_id(){
             // 나누어진 값의 비교를 통해 paramName 으로 요청된 데이터의 값만 return
           			}
        			} // 2중 for문 끝
-			};//함수 끝
+			}//함수 끝
 		alert(getParameters("id") + '님 방갑습니다!'); // 메시지 창 출력
 		}
 }
