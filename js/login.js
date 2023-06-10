@@ -30,154 +30,129 @@
 }; // 함수 끝
 alert(getParameters('id') + '님 방갑습니다!'); // 메시지 창 출력
 }*/
-
-function get_id(){
-    if(true){
+function get_id() {
+    if (true) {
         decrypt_text();
+    } else {
+        var getParameters = function (paramName) { // 변수 = 함수(이름)
+            var returnValue; // 리턴값을 위한 변수 선언
+            var url = location.href; // 현재 접속 중인 주소 정보 저장
+            var parameters = (url.slice(url.indexOf('?') + 1, url.length)).split('&'); // ?기준 slice 한 후 split 으로 나눔
+            for (var i = 0; i < parameters.length; i++) {
+                var varName = parameters[i].split('=')[0];
+                if (varName.toUpperCase() == paramName.toUpperCase()) {
+                    returnValue = parameters[i].split('=')[1];
+                    return decodeURIComponent(returnValue);
+                    // 나누어진 값의 비교를 통해 paramName 으로 요청된 데이터의 값만 return
+                }
+            } // 2중 for문 끝
+        } // 함수 끝
+        alert(getParameters("id") + '님 방갑습니다!'); // 메시지 창 출력
     }
-    else{
-        var getParameters = function(paramName){ // 변수 = 함수(이름)
-        var returnValue; // 리턴값을 위한 변수 선언
-    	var url = location.href; // 현재 접속 중인 주소 정보 저장
-    	var parameters = (url.slice(url.indexOf('?') + 1, url.length)).split('&'); // ?기준 slice 한 후 split 으로 나눔
-        	for(var i = 0; i < parameters.length; i++) { 
-          	  var varName = parameters[i].split('=')[0];
-            
-            if (varName.toUpperCase() == paramName.toUpperCase()) {
-                returnValue = parameters[i].split('=')[1];
-                return decodeURIComponent(returnValue);
-            // 나누어진 값의 비교를 통해 paramName 으로 요청된 데이터의 값만 return
-          			}
-       			} // 2중 for문 끝
-			}//함수 끝
-		alert(getParameters("id") + '님 방갑습니다!'); // 메시지 창 출력
-		}
 }
-
-function addJavascript(jsname){//자바스크립트 외부 연동
-			var th = document.getElementsByTagName('head')[0];
-			var s = document.createElement('script');
-			s.setAttribute('type','text/javascript');
-			s.setAttribute('src',jsname);
-			th.appendChild(s);
+function addJavascript(jsname) { // 자바스크립트 외부 연동
+    var th = document.getElementsByTagName('head')[0];
+    var s = document.createElement('script');
+    s.setAttribute('type', 'text/javascript');
+    s.setAttribute('src', jsname);
+    th.appendChild(s);
 }
-addJavascript('/js/security.js'); //암복호화 함수
-addJavascript('/js/session.js'); //세션 함수
-addJavascript('/js/cookie.js'); //쿠키 함수
-
-function login(){ // 로그인
+addJavascript('/js/security.js'); // 암복호화 함수
+addJavascript('/js/session.js'); // 세션 함수
+addJavascript('/js/cookie.js'); // 쿠키 함수
+function login() { // 로그인
     let form = document.querySelector("#form_main");
     let id = document.querySelector("#floatingInput");
     let password = document.querySelector("#floatingPassword");
     let check = document.querySelector("#idSaveCheck");
-	
-    
     form.action = "../index_login.html";
     form.method = "get";
-    
-    if(check.checked == true) { // 아이디 체크 o
-            alert("쿠키를 저장합니다.");
-            setCookie("id", id.value, 1); // 1일 저장
-            alert("쿠키 값 :" + id.value);
-        } 
-    else { // 아이디 체크 x
-            setCookie("id", id.value, 0); //날짜를 0 - 쿠키 삭제
+    if (check.checked == true) { // 아이디 체크 o
+        alert("쿠키를 저장합니다.");
+        setCookie("id", id.value, 1); // 1일 저장
+        alert("쿠키 값 :" + id.value);
+    } else { // 아이디 체크 x
+        setCookie("id", id.value, 0); // 날짜를 0 - 쿠키 삭제
     }
-    
-    if(id.value.length === 0 || password.value.length === 0){
+    if (id.value.length === 0 || password.value.length === 0) {
         alert("아이디와 비밀번호를 모두 입력해주세요.");
-		login_failed_count();
-	}
-	else if(!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(id.value)){
-    alert("올바른 이메일 형식이 아닙니다.");
-	login_failed_count();
-    }else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password.value)){
-    alert("비밀번호는 최소 8자 이상이어야 하며, 최소 하나의 대문자, 소문자, 숫자를 포함해야 합니다.");
-	login_failed_count();
-    }else{
-		login_count();
-		session_set(); // 세션 생성
-        form.submit();		
-    }	
+        login_failed_count();
+    } else if (!/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(id.value)) {
+        alert("올바른 이메일 형식이 아닙니다.");
+        login_failed_count();
+    } else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password.value)) {
+        alert("비밀번호는 최소 8자 이상이어야 하며, 최소 하나의 대문자, 소문자, 숫자를 포함해야 합니다.");
+        login_failed_count();
+    } else {
+        login_count();
+        session_set(); // 세션 생성
+        form.submit();
+    }
 }
-
 /*let keep_login;
 clearTimeout("keep_login")
-keep_login = setTimeout("logout()", 10000);*/  // 3분후 로그아웃
-
+keep_login = setTimeout("logout()", 10000);*/
+// 3분후 로그아웃
 function login_count() {
-let count = getCookie("login_cnt");
-//count = 0;
-//count = parseInt(count);
-
-if (count) {
-count = parseInt(count);
-count += 1;
-setCookie("login_cnt", count, 1);
-	}
-else{
-	 setCookie("login_cnt", 1 , 1);
-	}
+    let count = getCookie("login_cnt");
+    // count = 0;
+    // count = parseInt(count);
+    if (count) {
+        count = parseInt(count);
+        count += 1;
+        setCookie("login_cnt", count, 1);
+    } else {
+        setCookie("login_cnt", 1, 1);
+    }
 }
-
-function logout_count(){
-let count = getCookie("logout_cnt");
-//count = 0;
-//count = parseInt(count);
-	
-if (count) {//쿠키값이 있다면
-count = parseInt(count);// 숫자로 변환합니다.
-count += 1;// 로그아웃 횟수를 1 증가시킵니다.
-setCookie("logout_cnt", count, 1);//업데이트된 횟수를 "logout_cnt" 쿠키에 설정합니다.
-	}
-else{
-	 setCookie("logout_cnt", 1 , 1);//초기 로그아웃 횟수를 1로 설정하여 "logout_cnt" 쿠키를 생성합니다.
-	}
+function logout_count() {
+    let count = getCookie("logout_cnt");
+    // count = 0;
+    // count = parseInt(count);
+    if (count) { // 쿠키값이 있다면
+        count = parseInt(count); // 숫자로 변환합니다.
+        count += 1; // 로그아웃 횟수를 1 증가시킵니다.
+        setCookie("logout_cnt", count, 1); // 업데이트된 횟수를 "logout_cnt" 쿠키에 설정합니다.
+    } else {
+        setCookie("logout_cnt", 1, 1); // 초기 로그아웃 횟수를 1로 설정하여 "logout_cnt" 쿠키를 생성합니다.
+    }
 }
-
-function login_failed_count(){
-let count = getCookie("login_failed_cnt")
-
-if (count){
-	count = parseInt(count);
-	count++;
-	setCookie("login_failed_cnt", count, 1);
-}
-else{
-	setCookie("login_failed_cnt", 1, 1);
-	}	
-if (count == 3) {
+function login_failed_count() {
+    let count = getCookie("login_failed_cnt")
+    if (count) {
+        count = parseInt(count);
+        count++;
+        setCookie("login_failed_cnt", count, 1);
+    } else {
+        setCookie("login_failed_cnt", 1, 1);
+    }
+    if (count == 3) {
         alert("로그인 허용 횟수를 초과했습니다. 2분 동안 로그인할 수 없습니다.");
         // 로그인 제한 로직 추가
         restrictLogin();
     }
 }
-
-function restrictLogin() {
-    // 로그인 폼 요소를 비활성화합니다.
+function restrictLogin() { // 로그인 폼 요소를 비활성화합니다.
     let form = document.querySelector("#form_main");
     let id = document.querySelector("#floatingInput");
     let password = document.querySelector("#floatingPassword");
-    
     id.disabled = true;
     password.disabled = true;
-    form.removeEventListener('submit', login); // 로그인 시도를 막기 위해 이벤트 리스너를 제거합니다.
-    
+    form.removeEventListener('submit', login);
+    // 로그인 시도를 막기 위해 이벤트 리스너를 제거합니다.
     // 제한 시간이 지난 후 로그인 폼을 다시 활성화합니다.
     setTimeout("restrict_login", 120000); // 로그인 실패 횟수를 초기화합니다.
 }
-
-function restrict_login(){
-	id.disabled = true;
-	password.disable = true;
-	form.addEventListener('submit', login);
-	setCookie("login_failed_cnt", 0, 1);
+function restrict_login() {
+    id.disabled = true;
+    password.disable = true;
+    form.addEventListener('submit', login);
+    setCookie("login_failed_cnt", 0, 1);
 }
-
-function logout(){
+function logout() {
     session_del(); // 세션 삭제
-	logout_count();
-	location.href='../index.html';	
+    logout_count();
+    location.href = '../index.html';
 }
 /*function setCookie(name, value, expiredays) {
         var date = new Date();
@@ -225,7 +200,6 @@ function init(){ // 로그인 폼에 쿠키에서 가져온 아이디 입력
     }
 	session_check(); // 세션 유무 검사
 }*/
-
 /*function session_set() { //세션 저장
     let id = document.querySelector("#floatingInput");
 	    let password = document.querySelector("#floatingPassword");
