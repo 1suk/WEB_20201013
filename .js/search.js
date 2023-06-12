@@ -2,9 +2,9 @@
 function search_message(){
 	alert("검색을 수행합니다!");
 }*/
-//document.getElementById("search_btn").addEventListener('click', search_message);
+/*document.getElementById("search_btn").addEventListener('click', search_message);
 
-/*var search_array =[]; //빈 배열 - 전역 변수
+var search_array =[]; //빈 배열 - 전역 변수
 
 function search_message(){
    let search_str = document.getElementById("search_txt"); // 변수에 저장
@@ -22,10 +22,12 @@ function search_message(){
 			//search_array.sort();
 		}
 	}
-}*/               
+}*/         
 const limitWords = ["씨발", "미친", "개새끼"]; // 검색 제한 단어 선언 및 초기화
 
 document.getElementById("search_btn").addEventListener('click', search_message);
+
+var search_array =[]; //빈 배열 - 전역 변수
 
 function search_message(){
     let search_str = document.getElementById("search_txt").value; // 검색어 입력값 가져오기
@@ -35,7 +37,7 @@ function search_message(){
     else{
         let isLimitWord; // 검색어가 제한 단어인지 여부를 나타내는 변수
         for(let i = 0; i < limitWords.length; i++){
-            if(search_str === limitWords[i]){ // 검색어가 제한 단어와 일치하는 경우
+            if(search_str.includes(limitWords[i])){ // 검색어가 제한 단어와 일치하는 경우
                 isLimitWord = true; // 제한 단어임을 표시
                 break; // 반복문 중단
             }
@@ -45,10 +47,17 @@ function search_message(){
         }
         else{
             alert("검색을 수행합니다!");
+			search_array.push(search_str); //배열에 검색어 추가
+			let text = document.getElementById("search_message").innerHTML = search_array.toString();// 값 변환
             document.querySelector("#form_main").submit(); // 폼 실행
+			if(search_array.length >= 10){
+			search_array.push();
+			search_array.shift();
+			}
         }
-    }
+	}
 }
+
 /*document.getElementById("search_btn").addEventListener('click', search_message);
 const limitWords = ["씨발","미친","개새끼"];
 
@@ -61,14 +70,14 @@ let search_str = document.getElementById("search_txt").value; // Get search term
   } else {
     let isLimitWord = limitWords.includes(search_str); // Check if the search term is in the limitWords array
 
-    if (isLimitWord) { // if the search term is a limit word
+    if (isLimitWord == true) { // if the search term is a limit word
       alert("Your search is restricted. Please enter another search term.");
     } else {
       alert("Do a search!");
       document.querySelector("#form_main").submit(); // run the form
     }
   }
-}*/
+}
 /*document.getElementById("search_btn").addEventListener('click', search_message);
 
 var search_array = [];
